@@ -2,6 +2,7 @@ from fastapi import FastAPI, File, UploadFile, HTTPException, Form
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, StreamingResponse
 from fastapi.encoders import jsonable_encoder
+from docx.shared import RGBColor
 
 from sqlalchemy import text
 from sqlalchemy.exc import SQLAlchemyError
@@ -450,10 +451,10 @@ def generate_word_order(clienteId: int):
         header = doc.add_table(rows=1, cols=3)
         row = header.rows[0].cells
 
-        # Logo base64 (reemplaza esta cadena con tu logo si lo deseas)
-        # logo_base64 = "..."  
-        # image_stream = BytesIO(base64.b64decode(logo_base64))
-        # row[0].paragraphs[0].add_run().add_picture(image_stream, width=Inches(1.2))
+        # Reemplaza con tu cadena base64 real del logo
+        logo_base64 = "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"
+        image_stream = BytesIO(base64.b64decode(logo_base64))
+        row[0].paragraphs[0].add_run().add_picture(image_stream, width=Inches(1.2))
 
         row[1].text = (
             "ORDEN DE SERVICIO\nServicio Automotriz Trotamundos\n"
@@ -468,43 +469,176 @@ def generate_word_order(clienteId: int):
         row[2].text = f"ORDEN\nNo. {data['Orden']}"
         row[2].paragraphs[0].alignment = WD_PARAGRAPH_ALIGNMENT.RIGHT
 
-        def add_section(title: str, content: dict):
-            p = doc.add_paragraph()
-            run = p.add_run(title)
-            run.bold = True
-            p.alignment = WD_PARAGRAPH_ALIGNMENT.LEFT
-            add_table(content)
+        def set_cell_width(cell, width_cm):
+            tc = cell._tc
+            tcPr = tc.get_or_add_tcPr()
+            tcW = tcPr.find(qn('w:tcW'))
+            if tcW is None:
+                tcW = OxmlElement('w:tcW')
+                tcPr.append(tcW)
+            tcW.set(qn('w:w'), str(int(width_cm * 567)))  # 1 cm ~ 567 twips
+            tcW.set(qn('w:type'), 'dxa')
 
-        def add_table(data_dict):
-            table = doc.add_table(rows=len(data_dict), cols=2)
+        def set_table_borders(table, border_size=24):
+            tbl = table._tbl
+            tblPr = tbl.tblPr
+            if tblPr is None:
+                tblPr = OxmlElement('w:tblPr')
+                tbl.insert(0, tblPr)
+
+            tblBorders = tblPr.find(qn('w:tblBorders'))
+            if tblBorders is None:
+                tblBorders = OxmlElement('w:tblBorders')
+                tblPr.append(tblBorders)
+
+            for border_name in ['top', 'left', 'bottom', 'right', 'insideH', 'insideV']:
+                border = tblBorders.find(qn(f'w:{border_name}'))
+                if border is None:
+                    border = OxmlElement(f'w:{border_name}')
+                    tblBorders.append(border)
+                border.set(qn('w:val'), 'single')
+                border.set(qn('w:sz'), str(border_size))  # grosor del borde
+                border.set(qn('w:space'), '0')
+                border.set(qn('w:color'), '000000')  # negro
+
+        def set_font(run, font_name='Times New Roman', font_size_pt=10, bold=True):
+            run.font.name = font_name
+            run.font.size = Pt(font_size_pt)
+            run.font.bold = bold
+            rFonts = run._element.rPr.rFonts
+            rFonts.set(qn('w:eastAsia'), font_name)
+
+        def add_table(data_dict, title):
+            # Crear tabla con 1 fila más para encabezado y 2 columnas
+            table = doc.add_table(rows=len(data_dict) + 1, cols=2)
             table.style = 'Table Grid'
-            for i, (key, val) in enumerate(data_dict.items()):
-                table.cell(i, 0).text = key
-                table.cell(i, 1).text = str(val)
-                for cell in table.rows[i].cells:
+
+            # Ajustar bordes con mayor grosor
+            set_table_borders(table, border_size=24)  # 24 = 1.2 pt
+
+            # Ajustar ancho columnas (ejemplo: 5cm y 7cm)
+            for row in table.rows:
+                set_cell_width(row.cells[0], 5)
+                set_cell_width(row.cells[1], 7)
+
+            # Encabezado - fila 0, celdas 0 y 1
+            header_cells = table.rows[0].cells
+            header_cells[0].text = title
+            header_cells[1].text = ""
+
+            # Estilo para encabezado (negrita, texto blanco, fondo gris)
+            for cell in header_cells:
+                for paragraph in cell.paragraphs:
+                    for run in paragraph.runs:
+                        set_font(run, font_name='Times New Roman', font_size_pt=11, bold=True)
+                        run.font.color.rgb = RGBColor(255, 255, 255)
+                    paragraph.alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
+
+                shading_elm = OxmlElement('w:shd')
+                shading_elm.set(qn('w:fill'), '808080')  # gris oscuro
+                cell._tc.get_or_add_tcPr().append(shading_elm)
+
+            # Agregar filas con datos desde la fila 1 en adelante
+            for i, (key, val) in enumerate(data_dict.items(), start=1):
+                key_cell = table.cell(i, 0)
+                val_cell = table.cell(i, 1)
+
+                key_cell.text = str(key)
+                val_cell.text = str(val)
+
+                # Estilo para texto en filas de datos
+                for cell in (key_cell, val_cell):
                     for paragraph in cell.paragraphs:
                         paragraph.alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
                         for run in paragraph.runs:
-                            run.font.size = Pt(8)
+                            set_font(run, font_name='Times New Roman', font_size_pt=9, bold=True)
+
+                # Ajustar altura fila datos (más pequeña)
+                tr = key_cell._tc.getparent()
+                trPr = tr.get_or_add_trPr()
+                trHeight = OxmlElement('w:trHeight')
+                trHeight.set(qn('w:val'), "240")  # aprox 12 pts para fila más pequeña
+                trHeight.set(qn('w:hRule'), 'exact')
+                trPr.append(trHeight)
+
+            return table
+
+
+        def add_section(title: str, content: dict):
+            # En vez de un párrafo para título, el título está en encabezado de tabla
+            add_table(content, title)
+
 
         # Agregar secciones
         add_section("Información del Cliente", data)
         add_section("Detalles del Vehículo", vehicle_data)
         add_section("Inventario del Vehículo", inventory_data)
 
-        # Observaciones y firmas
-        doc.add_paragraph("\nObservaciones: ____________________________________________")
-        doc.add_paragraph("___________________________________________________________")
-        doc.add_paragraph("\n\n")
+        tabla_obs = doc.add_table(rows=2, cols=1)
+        tabla_obs.style = 'Table Grid'  # Asegura que tenga bordes visibles
+
+# Fila 0: encabezado
+        set_table_borders(tabla_obs, border_size=24)  # grosor 1.2 pt como en las otras tablas
+
+        # Celda de encabezado
+        celda_encabezado = tabla_obs.cell(0, 0)
+        celda_encabezado.text = "Observaciones"
+
+        for parrafo in celda_encabezado.paragraphs:
+            for run in parrafo.runs:
+                set_font(run, font_name='Times New Roman', font_size_pt=11, bold=True)
+                run.font.color.rgb = RGBColor(255, 255, 255)  # blanco
+            parrafo.alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
+
+        # Fondo gris del encabezado
+        shading_elm = OxmlElement('w:shd')
+        shading_elm.set(qn('w:fill'), '808080')  # gris oscuro
+        celda_encabezado._tc.get_or_add_tcPr().append(shading_elm)
+
+        # Fila 1: celda vacía para observaciones
+        celda_obs = tabla_obs.cell(1, 0)
+        celda_obs.text = ""  # vacía, espacio para escribir observaciones
+
+        # Ajustar altura de la fila de observaciones
+        tr = celda_obs._tc.getparent()
+        trPr = tr.get_or_add_trPr()
+        trHeight = OxmlElement('w:trHeight')
+        trHeight.set(qn('w:val'), "360")  # 18 puntos de alto
+        trHeight.set(qn('w:hRule'), 'exact')
+        trPr.append(trHeight)
+
+        # Ajustar fuente de la celda de observaciones
+        for parrafo in celda_obs.paragraphs:
+            for run in parrafo.runs:
+                set_font(run, font_name='Times New Roman', font_size_pt=9, bold=True)
+            parrafo.alignment = WD_PARAGRAPH_ALIGNMENT.LEFT
 
         firmas = doc.add_paragraph()
         firmas.alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
-        firmas.add_run("__________________________           __________________________\n").bold = True
-        firmas.add_run("Firma del Proveedor                   Firma del Cliente")
+
+        tabla_firmas = doc.add_table(rows=2, cols=2)
+        tabla_firmas.alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
+        tabla_firmas.autofit = True
+
+        tabla_firmas.cell(0, 0).text = "__________________________"
+        tabla_firmas.cell(0, 1).text = "__________________________"
+
+        tabla_firmas.cell(1, 0).text = "Firma del Proveedor"
+        tabla_firmas.cell(1, 1).text = "Firma del Cliente"
+
+        # Estilo de fuente en la tabla de firmas
+        for row in tabla_firmas.rows:
+            for cell in row.cells:
+                for paragraph in cell.paragraphs:
+                    for run in paragraph.runs:
+                        run.font.size = Pt(9)
+                        run.font.bold = True
+                    paragraph.alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
+
+
 
         # Segunda página
         doc.add_page_break()
-
         contrato_text = """ADEMAS DE LOS ELEMENTOS CONTENIDOS EN EL ANVERSO DEL PRESENTE CONTRATO DE PRESTACIÓN DE SERVICIOS DE REPARACIÓN DE VEHÍCULOS, LAS PARTES SE SUJETAN A LAS SIGUIENTES: Y MANT
 
         CLAUSULAS
@@ -563,15 +697,28 @@ def generate_word_order(clienteId: int):
 
         Domicilio: 29 Guerrero y Bravo #422. Héroe de Nacozari. C.P. 87030 Ciudad Victoria, Tam
         """
-        parrafo = doc.add_paragraph(contrato_text)
-        for run in parrafo.runs:
-            run.font.size = Pt(6)
 
-        # Guardar en memoria
+        # Divide en párrafos por cláusula
+        for clausula in contrato_text.split("\n\n"):
+            parrafo = doc.add_paragraph(clausula.strip())
+            parrafo.paragraph_format.line_spacing = 1.0
+            for run in parrafo.runs:
+                run.font.size = Pt(5.5)  # Más pequeño para compactar
+
+        # REDUCIR MÁRGENES
+        sections = doc.sections
+        for section in sections:
+            section.top_margin = Inches(0.4)
+            section.bottom_margin = Inches(0.4)
+            section.left_margin = Inches(0.5)
+            section.right_margin = Inches(0.5)
+
+        # GUARDAR EN MEMORIA
         file_stream = BytesIO()
         doc.save(file_stream)
         file_stream.seek(0)
         return file_stream
+        
 
     except Exception as e:
         return {"error": str(e)}
