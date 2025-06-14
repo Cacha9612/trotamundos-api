@@ -93,25 +93,25 @@ class VehiculoV2(BaseModel):
     Molduras_completas_foto: List[str]
     MotorVehiculo_video: List[str]
     Acumulador_video: List[str]
-    Espejo_retrovisor_video: List[str]  
-    Espejo_izquierdo_video: List[str]   
-    Espejo_derecho_video: List[str]     
-    Antena_video: List[str]             
-    Tapones_ruedas_video: List[str]     
-    Radio_video: List[str]              
-    Encendedor_video: List[str]         
-    Gato_video: List[str]               
-    Herramienta_video: List[str]        
-    Llanta_refaccion_video: List[str]   
-    Limpiadores_video: List[str]        
-    Pintura_rayada_video: List[str]     
-    Cristales_rotos_video: List[str]    
-    Golpes_video: List[str]             
-    Tapetes_video: List[str]            
-    Extintor_video: List[str]           
-    Tapones_gasolina_video: List[str]   
-    Calaveras_rotas_video: List[str]    
-    Molduras_completas_video: List[str] 
+    Espejo_retrovisor_video: List[str]
+    Espejo_izquierdo_video: List[str]
+    Espejo_derecho_video: List[str]
+    Antena_video: List[str]
+    Tapones_ruedas_video: List[str]
+    Radio_video: List[str]
+    Encendedor_video: List[str]
+    Gato_video: List[str]
+    Herramienta_video: List[str]
+    Llanta_refaccion_video: List[str]
+    Limpiadores_video: List[str]
+    Pintura_rayada_video: List[str]
+    Cristales_rotos_video: List[str]
+    Golpes_video: List[str]
+    Tapetes_video: List[str]
+    Extintor_video: List[str]
+    Tapones_gasolina_video: List[str]
+    Calaveras_rotas_video: List[str]
+    Molduras_completas_video: List[str]
     IdFlotilla: int
     IdOrdenServicio: int
     Activo: int
@@ -154,6 +154,7 @@ class Vehiculo(BaseModel):
     Tablero:int
     Guantera:int
     Consola:int
+    NumeroEconomico: Optional[str] = ""
     MotorVehiculo_foto: List[str]
     Acumulador_foto: List[str]
     Espejo_retrovisor_foto: List[str]
@@ -175,7 +176,7 @@ class Vehiculo(BaseModel):
     Tapones_gasolina_foto: List[str]
     Calaveras_rotas_foto: List[str]
     Molduras_completas_foto: List[str]
-    Panel_instrumentos_foto :List[str] 
+    Panel_instrumentos_foto :List[str]
     Lado_izquierdo_foto: List[str]
     Lado_izquierdo_inf_foto: List[str]
     Lado_derecho_foto:List[str]
@@ -183,28 +184,29 @@ class Vehiculo(BaseModel):
     Tablero_foto:List[str]
     Guantera_foto:List[str]
     Consola_foto:List[str]
+    NumeroEconomico_foto:List[str]
     MotorVehiculo_video: List[str]
     Acumulador_video: List[str]
-    Espejo_retrovisor_video: List[str]  
-    Espejo_izquierdo_video: List[str]   
-    Espejo_derecho_video: List[str]     
-    Antena_video: List[str]             
-    Tapones_ruedas_video: List[str]     
-    Radio_video: List[str]              
-    Encendedor_video: List[str]         
-    Gato_video: List[str]               
-    Herramienta_video: List[str]        
-    Llanta_refaccion_video: List[str]   
-    Limpiadores_video: List[str]        
-    Pintura_rayada_video: List[str]     
-    Cristales_rotos_video: List[str]    
-    Golpes_video: List[str]             
-    Tapetes_video: List[str]            
-    Extintor_video: List[str]           
-    Tapones_gasolina_video: List[str]   
-    Calaveras_rotas_video: List[str]    
-    Molduras_completas_video: List[str] 
-    Panel_instrumentos_video :List[str] 
+    Espejo_retrovisor_video: List[str]
+    Espejo_izquierdo_video: List[str]
+    Espejo_derecho_video: List[str]
+    Antena_video: List[str]
+    Tapones_ruedas_video: List[str]
+    Radio_video: List[str]
+    Encendedor_video: List[str]
+    Gato_video: List[str]
+    Herramienta_video: List[str]
+    Llanta_refaccion_video: List[str]
+    Limpiadores_video: List[str]
+    Pintura_rayada_video: List[str]
+    Cristales_rotos_video: List[str]
+    Golpes_video: List[str]
+    Tapetes_video: List[str]
+    Extintor_video: List[str]
+    Tapones_gasolina_video: List[str]
+    Calaveras_rotas_video: List[str]
+    Molduras_completas_video: List[str]
+    Panel_instrumentos_video :List[str]
     Lado_izquierdo_video: List[str]
     Lado_izquierdo_inf_video: List[str]
     Lado_derecho_video:List[str]
@@ -212,6 +214,7 @@ class Vehiculo(BaseModel):
     Tablero_video:List[str]
     Guantera_video:List[str]
     Consola_video:List[str]
+    NumeroEconomico_video:List[str]
     IdFlotilla: int
     IdOrdenServicio: int
     Activo: int
@@ -219,32 +222,32 @@ class Vehiculo(BaseModel):
 
 class saveVehiculo(Vehiculo):
     Id_Cliente: int
-    
+
 class GetVehiculo(Vehiculo):
     ID : int
     Id_Cliente : int
     Id_Empleado : int
     MotorVehiculo_foto: List[str]
     Acumulador_foto: List[str]
-    Espejo_retrovisor_foto: List[str]  
-    Espejo_izquierdo_foto: List[str]   
-    Espejo_derecho_foto: List[str]     
-    Antena_foto: List[str]             
-    Tapones_ruedas_foto: List[str]     
-    Radio_foto: List[str]              
-    Encendedor_foto: List[str]         
-    Gato_foto: List[str]               
-    Herramienta_foto: List[str]        
-    Llanta_refaccion_foto: List[str]   
-    Limpiadores_foto: List[str]        
-    Pintura_rayada_foto: List[str]     
-    Cristales_rotos_foto: List[str]    
-    Golpes_foto: List[str]             
-    Tapetes_foto: List[str]            
-    Extintor_foto: List[str]           
-    Tapones_gasolina_foto: List[str]   
-    Calaveras_rotas_foto: List[str]    
-    Molduras_completas_foto: List[str] 
+    Espejo_retrovisor_foto: List[str]
+    Espejo_izquierdo_foto: List[str]
+    Espejo_derecho_foto: List[str]
+    Antena_foto: List[str]
+    Tapones_ruedas_foto: List[str]
+    Radio_foto: List[str]
+    Encendedor_foto: List[str]
+    Gato_foto: List[str]
+    Herramienta_foto: List[str]
+    Llanta_refaccion_foto: List[str]
+    Limpiadores_foto: List[str]
+    Pintura_rayada_foto: List[str]
+    Cristales_rotos_foto: List[str]
+    Golpes_foto: List[str]
+    Tapetes_foto: List[str]
+    Extintor_foto: List[str]
+    Tapones_gasolina_foto: List[str]
+    Calaveras_rotas_foto: List[str]
+    Molduras_completas_foto: List[str]
     Lado_izquierdo_foto: List[str]
     Lado_izquierdo_inf_foto: List[str]
     Lado_derecho_foto:List[str]
@@ -252,27 +255,28 @@ class GetVehiculo(Vehiculo):
     Tablero_foto:List[str]
     Guantera_foto:List[str]
     Consola_foto:List[str]
+    NumeroEconomico_foto:List[str]
     MotorVehiculo_video: List[str]
-    Acumulador_video: List[str]  
-    Espejo_retrovisor_video: List[str]  
-    Espejo_izquierdo_video: List[str]   
-    Espejo_derecho_video: List[str]     
-    Antena_video: List[str]             
-    Tapones_ruedas_video: List[str]     
-    Radio_video: List[str]              
-    Encendedor_video: List[str]         
-    Gato_video: List[str]               
-    Herramienta_video: List[str]        
-    Llanta_refaccion_video: List[str]   
-    Limpiadores_video: List[str]        
-    Pintura_rayada_video: List[str]     
-    Cristales_rotos_video: List[str]    
-    Golpes_video: List[str]             
-    Tapetes_video: List[str]            
-    Extintor_video: List[str]           
-    Tapones_gasolina_video: List[str]   
-    Calaveras_rotas_video: List[str]    
-    Molduras_completas_video: List[str] 
+    Acumulador_video: List[str]
+    Espejo_retrovisor_video: List[str]
+    Espejo_izquierdo_video: List[str]
+    Espejo_derecho_video: List[str]
+    Antena_video: List[str]
+    Tapones_ruedas_video: List[str]
+    Radio_video: List[str]
+    Encendedor_video: List[str]
+    Gato_video: List[str]
+    Herramienta_video: List[str]
+    Llanta_refaccion_video: List[str]
+    Limpiadores_video: List[str]
+    Pintura_rayada_video: List[str]
+    Cristales_rotos_video: List[str]
+    Golpes_video: List[str]
+    Tapetes_video: List[str]
+    Extintor_video: List[str]
+    Tapones_gasolina_video: List[str]
+    Calaveras_rotas_video: List[str]
+    Molduras_completas_video: List[str]
     Lado_izquierdo_video: List[str]
     Lado_izquierdo_inf_video: List[str]
     Lado_derecho_video:List[str]
@@ -280,6 +284,7 @@ class GetVehiculo(Vehiculo):
     Tablero_video:List[str]
     Guantera_video:List[str]
     Consola_video:List[str]
+    NumeroEconomico:List[str]
     IdFlotilla: int
     IdOrdenServicio: int
     Activo: int
@@ -374,7 +379,7 @@ class Empleado(BaseModel):
     Nombre: str
     Rol: int
     Estatus: int
-    
+
 class CheckListHistorico(BaseModel):
     IdChecklist: int
     IdVehiculo: int
@@ -382,7 +387,7 @@ class CheckListHistorico(BaseModel):
     Fecha: str
     TiempoTranscurrido: int
     Estado :str
-    
+
 class Flotillas(BaseModel):
     IdFlotilla: int
     NamesFlotillas: str
@@ -615,7 +620,7 @@ class Checklist(BaseModel):
     id_checklist: Optional[int] = None
     Activo: Optional[int] = None
     #NuevasVariables
-    
+
 class Tecnicos(BaseModel):
     IdUsuario : int
     Nombre : str
@@ -624,7 +629,7 @@ class Tecnicos(BaseModel):
 class AsignarOrden(BaseModel):
     IdOrden : int
     IdTecnico : int
-    
+
 class ReporteVentas(BaseModel):
     Id: Optional[int] = None  # Haciendo que Id sea opcional
     date: str

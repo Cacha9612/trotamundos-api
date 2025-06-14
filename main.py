@@ -1,38 +1,47 @@
-from fastapi import FastAPI, File, UploadFile, HTTPException, Form                                                      from sqlalchemy import text                                                                                             from database import engine                                                                                             import pandas as pd  # Importa Pandas                                                                                   from fastapi.middleware.cors import CORSMiddleware                                                                      from modelos import GetCliente, ResponseModel, SaveCliente, Vehiculo, GetOrden, GetVehiculo, SaveOrden, DatosLogin, Tok>from fastapi.responses import JSONResponse                                                                              import json                                                                                                             from typing import List                                                                                                 from negocios import Negocios                                                                                           from datetime import timedelta                                                                                          from utils import utilsclass                                                                                            import os                                                                                                               import pdfkit                                                                                                           from typing import Optional                                                                                             import base64                                                                                                           from PIL import Image                                                                                                   from io import BytesIO                                                                                                  from fastapi.responses import StreamingResponse                                                                         from typing import Dict                                                                                                 from docx import Document                                                                                               from docx.shared import Pt, Inches                                                                                      from pydantic import BaseModel                                                                                          from typing import Dict, List                                                                                           from docx.enumfrom fastapi import FastAPI, File, UploadFile, HTTPException, Form
-from sqlalchemy import text
-from database import engine
-import pandas as pd  # Importa Pandas
+from fastapi import FastAPI, File, UploadFile, HTTPException, Form
 from fastapi.middleware.cors import CORSMiddleware
-from modelos import GetCliente, ResponseModel, SaveCliente, Vehiculo, GetOrden, GetVehiculo, SaveOrden, DatosLogin, Token, OrdenCompleta, Roles, Estatus, SaveUsuario, saveVehiculo, ImageData, Empleado,OrdenService,Checklist,CheckListHistorico,Flotillas,ModificarVehiculo,Tecnicos,AsignarOrden,ReporteVentas,VehiculoV2
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, StreamingResponse
+from fastapi.encoders import jsonable_encoder
+
+from sqlalchemy import text
+from sqlalchemy.exc import SQLAlchemyError
+from sqlalchemy.sql import text
+from database import engine
+
+import pandas as pd  # Importa Pandas
 import json
-from typing import List
-from negocios import Negocios
-from datetime import timedelta
-from utils import utilsclass
 import os
 import pdfkit
-from typing import Optional
 import base64
+import logging
+import io
+
+from datetime import timedelta, datetime
+
+from typing import List, Optional, Dict
+
 from PIL import Image
+
 from io import BytesIO
-from fastapi.responses import StreamingResponse
-from typing import Dict
+
+from pydantic import BaseModel
+
 from docx import Document
 from docx.shared import Pt, Inches
-from pydantic import BaseModel
-from typing import Dict, List
 from docx.enum.text import WD_PARAGRAPH_ALIGNMENT, WD_BREAK
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
-ACCESS_TOKEN_EXPIRE_MINUTES = 480
-import logging
-from fastapi.encoders import jsonable_encoder
-from PIL import Image
-from datetime import datetime
-import io
-from sqlalchemy.exc import SQLAlchemyError
-from sqlalchemy.sql import text
+
+from modelos import (
+    GetCliente, ResponseModel, SaveCliente, Vehiculo, GetOrden, GetVehiculo,
+    SaveOrden, DatosLogin, Token, OrdenCompleta, Roles, Estatus, SaveUsuario,
+    saveVehiculo, ImageData, Empleado, OrdenService, Checklist, CheckListHistorico,
+    Flotillas, ModificarVehiculo, Tecnicos, AsignarOrden, ReporteVentas, VehiculoV2
+)
+
+from negocios import Negocios
+from utils import utilsclass
+
 # Configuración del logger
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
