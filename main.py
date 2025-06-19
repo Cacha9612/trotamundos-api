@@ -39,7 +39,7 @@ from modelos import (
     saveVehiculo, ImageData, Empleado, OrdenService, Checklist, CheckListHistorico,
     Flotillas, ModificarVehiculo, Tecnicos, AsignarOrden, ReporteVentas, VehiculoV2
 )
-
+ACCESS_TOKEN_EXPIRE_MINUTES = 480
 from negocios import Negocios
 from utils import utilsclass
 
