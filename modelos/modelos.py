@@ -154,6 +154,9 @@ class Vehiculo(BaseModel):
     Tablero:int
     Guantera:int
     Consola:int
+    LadoFrontal:int
+    LadoTrasero:int
+    Cajuela:int
     NumeroEconomico: Optional[str] = ""
     MotorVehiculo_foto: List[str]
     Acumulador_foto: List[str]
@@ -184,6 +187,9 @@ class Vehiculo(BaseModel):
     Tablero_foto:List[str]
     Guantera_foto:List[str]
     Consola_foto:List[str]
+    LadoFrontal_foto:List[str]
+    LadoTrasero_foto:List[str]
+    Cajuela_foto:List[str]
     NumeroEconomico_foto:List[str]
     MotorVehiculo_video: List[str]
     Acumulador_video: List[str]
@@ -214,6 +220,9 @@ class Vehiculo(BaseModel):
     Tablero_video:List[str]
     Guantera_video:List[str]
     Consola_video:List[str]
+    LadoFrontal_video:List[str]
+    LadoTrasero_video:List[str]
+    Cajuela_video:List[str]
     NumeroEconomico_video:List[str]
     IdFlotilla: int
     IdOrdenServicio: int

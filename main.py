@@ -988,6 +988,9 @@ def guardarVehiculo(payload: saveVehiculo):
             "Tablero_foto": ",".join(payload.Tablero_foto),
             "Guantera_foto": ",".join(payload.Guantera_foto),
             "Consola_foto": ",".join(payload.Consola_foto),
+            "LadoFrontal_foto": ",".join(payload.LadoFrontal_foto),
+            "LadoTrasero_foto": ",".join(payload.LadoTrasero_foto),
+            "Cajuela_foto": ",".join(payload.Cajuela_foto),
             "NumeroEconomico_foto": ",".join(payload.NumeroEconomico_foto),
 
 
@@ -1022,6 +1025,9 @@ def guardarVehiculo(payload: saveVehiculo):
             "Tablero_video": ",".join(payload.Tablero_video),
             "Guantera_video": ",".join(payload.Guantera_video),
             "Consola_video": ",".join(payload.Consola_video),
+            "LadoFrontal_video": ",".join(payload.LadoFrontal_video),
+            "LadoTrasero_video": ",".join(payload.LadoTrasero_video),
+            "Cajuela_video": ",".join(payload.Cajuela_video),
             "NumeroEconomico_video": ",".join(payload.NumeroEconomico_video)
 
         }
@@ -1071,6 +1077,9 @@ def guardarVehiculo(payload: saveVehiculo):
                 @Tablero = :Tablero,
                 @Guantera = :Guantera,
                 @Consola = :Consola,
+                @LadoFrontal = :LadoFrontal,
+                @LadoTrasero = :LadoTrasero,
+                @Cajuela = :Cajuela,
                 @NumeroEconomico = :NumeroEconomico,
                 @MotorVehiculo_foto = :MotorVehiculo_foto,
                 @Acumulador_foto = :Acumulador_foto,
@@ -1101,6 +1110,9 @@ def guardarVehiculo(payload: saveVehiculo):
                 @Tablero_foto = :Tablero_foto,
                 @Guantera_foto = :Guantera_foto,
                 @Consola_foto = :Consola_foto,
+                @LadoFrontal_foto = :LadoFrontal_foto,
+                @LadoTrasero_foto = :LadoTrasero_foto,
+                @Cajuela_foto = :Cajuela_foto,
                 @NumeroEconomico_foto = :NumeroEconomico_foto,
                 @MotorVehiculo_video = :MotorVehiculo_video,
                 @Acumulador_video = :Acumulador_video,
@@ -1131,6 +1143,9 @@ def guardarVehiculo(payload: saveVehiculo):
                 @Tablero_video = :Tablero_video,
                 @Guantera_video = :Guantera_video,
                 @Consola_video = :Consola_video,
+                @LadoFrontal_video = :LadoFrontal_video,
+                @LadoTrasero_video = :LadoTrasero_video,
+                @Cajuela_video = :Cajuela_video,
                 @NumeroEconomico_video = :NumeroEconomico_video,
                 @IdFlotilla = :IdFlotilla,
                 @IdOrdenServicio = :IdOrdenServicio,
@@ -1195,6 +1210,9 @@ def updateVehiculo(payload: VehiculoV2):
             "Tablero_foto",
             "Guantera_foto",
             "Consola_foto",
+            "LadoFrontal_foto",
+            "LadoTrasero_foto",
+            "Cajuela_foto",
             "NumeroEconomico_foto",
 
 
@@ -1212,6 +1230,9 @@ def updateVehiculo(payload: VehiculoV2):
             "Tablero_video",
             "Guantera_video",
             "Consola_video",
+            "LadoFrontal_video",
+            "LadoTrasero_video",
+            "Cajuela_video",
             "NumeroEconomico_video"
         ]
 
@@ -1267,6 +1288,9 @@ def updateVehiculo(payload: VehiculoV2):
             @Tablero = :Tablero,
             @Guantera = :Guantera,
             @Consola = :Consola,
+            @LadoFrontal = :LadoFrontal,
+            @LadoTrasero = :LadoTrasero,
+            @Cajuela = :Cajuela,
             @NumeroEconomico = :NumeroEconomico,
             @MotorVehiculo_foto = :MotorVehiculo_foto,
             @Acumulador_foto = :Acumulador_foto,
@@ -1297,6 +1321,9 @@ def updateVehiculo(payload: VehiculoV2):
             @Tablero_foto = Tablero_foto,
             @Guantera_foto = Guantera_foto,
             @Consola_foto = Consola_foto,
+            @LadoFrontal_foto = LadoFrontal_foto,
+            @LadoTrasero_foto = LadoTrasero_foto,
+            @Cajuela_foto = Cajuela_foto,
             @NumeroEconomico_foto = NumeroEconomico_foto,
             @MotorVehiculo_video = :MotorVehiculo_video,
             @Acumulador_video = :Acumulador_video,
@@ -1327,6 +1354,9 @@ def updateVehiculo(payload: VehiculoV2):
             @Tablero_video = Tablero_video,
             @Guantera_video = Guantera_video,
             @Consola_video = Consola_video,
+            @LadoFrontal_video = LadoFrontal_video,
+            @LadoTrasero_video = LadoTrasero_video,
+            @Cajuela_video = Cajuela_video,
             @NumeroEconomico_video = NumeroEconomico_video,
             @IdFlotilla = :IdFlotilla,
             @IdOrdenServicio = :IdOrdenServicio,
