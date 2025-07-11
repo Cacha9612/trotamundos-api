@@ -1,4 +1,4 @@
-from fastapi import FastAPI, File, UploadFile, HTTPException, Form
+from fastapi import FastAPI, File, UploadFile, HTTPException,Query, Form
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, StreamingResponse
 from fastapi.encoders import jsonable_encoder
@@ -3551,11 +3551,10 @@ def getclientes(busqueda = ""):
         description='Método para obtener la informacion de todos los clientes',
         response_model=List[GetCliente]
 )
-
 def cliente_existe(nombre: str = "", email: str = ""):
-    with engine.raw_connection() as conn:
+    conn = engine.raw_connection()
+    try:
         cursor = conn.cursor()
-        # Ejecutamos el SP con variables y capturamos el parámetro de salida
         cursor.execute("""
             DECLARE @Existe BIT;
             EXEC sp_Cliente_Existe @Nombre = ?, @Email = ?, @Existe = @Existe OUTPUT;
@@ -3566,6 +3565,9 @@ def cliente_existe(nombre: str = "", email: str = ""):
         existe_valor = row[0] if row else 0
 
         return JSONResponse(status_code=200, content={"existe": bool(existe_valor)})
+    finally:
+        conn.close()
+
 
 @app.post(
         path="/api/ordenservice",
