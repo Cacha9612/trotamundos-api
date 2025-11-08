@@ -2660,7 +2660,7 @@ def put_servicio(payload: Checklist):
         description='Método para obtener la informacion todos los servicios',
         response_model=Checklist
 )
-def getallchecklists():
+def getallservicess():
     query = f"exec [dbo].[sp_get_all_serivcev2]"
     roles_df = pd.read_sql(query, engine)
     resultado = roles_df.to_dict(orient="records")
