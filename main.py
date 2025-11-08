@@ -3048,6 +3048,27 @@ def getallchecklists():
         description='Método para obtener la informacion todos los checklist',
         response_model=Checklist
 )
+
+@app.get(
+        path="/api/obtenerallchecklists",
+        name='Obtener todos los checklists',
+        tags=['Checklist'],
+        description='Método para obtener la informacion todos los checklists',
+        response_model=Checklist
+)
+def getallchecklists():
+    query = f"exec [dbo].[sp_get_all_serivcev2]"
+    roles_df = pd.read_sql(query, engine)
+    resultado = roles_df.to_dict(orient="records")
+    return JSONResponse(status_code=200,content=resultado)
+
+@app.get(
+        path="/api/obtenerServices",
+        name='Obtener all services',
+        tags=['Servicio'],
+        description='Método para obtener la informacion todos los servicios',
+        response_model=Checklist
+)
 def getchecklists(IdEmpleado:int):
     query = f"exec [dbo].[ObtenerCheckLists] @IdEmpleado = {IdEmpleado} "
     roles_df = pd.read_sql(query, engine)
